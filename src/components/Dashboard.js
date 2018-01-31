@@ -34,9 +34,14 @@ class Dashboard extends React.Component{
   render(){
 
   	return(
-  		<div>
-        <input type="text" onChange={this.onInputChange}/>
-        <button onClick={this.handleOnClick}>Search</button>
+  		<div className="content-container ">
+        <div className="input-group">
+          <div className="input-group__item">
+            <input className="text-input" type="text" onChange={this.onInputChange}/>
+          </div>
+          <div className="input-group__item">
+            <button className="button " onClick={this.handleOnClick}>Search</button></div>
+          </div>
   		</div>
   	);
   }

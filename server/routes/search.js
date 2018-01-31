@@ -12,7 +12,14 @@ module.exports = function(app,db) {
     var searchInput = new searchWordSchema({
       word: req.body.input,
     })
-    db.collection("searchWord").insert(searchInput)
+
+    db.collection("searchWord").find({word: req.body.input}).toArray(function(err, result) {
+        if (err) throw err;
+        if(result.length == 0){
+            db.collection("searchWord").insert(searchInput, {upsert:true})
+        }
+    })
+    // db.collection().insert(searchInput)
     next();
   }
 

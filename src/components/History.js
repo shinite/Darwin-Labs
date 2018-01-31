@@ -25,7 +25,7 @@ class History extends React.Component{
   }
 
   render(){
-    var printList = this.state.wordList.map((data,index) => <p key={index}><NavLink to={"/images/"+data.word}  className="myLink">{data.word}</NavLink></p>)
+    var printList = this.state.wordList.map((data,index) => <p key={index}><NavLink to={"/images/"+data.word}  className="button display--link">{data.word}</NavLink></p>)
     //console.log( this.state.wordList[0],"printLIst");
   	return(
   		<div>

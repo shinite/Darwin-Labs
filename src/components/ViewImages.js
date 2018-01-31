@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 var imagesPath = []
+//import image1 from "../../server/images/hermione/hermione1.jpeg"
 class ViewImages extends React.Component{
 
   componentWillMount(){
@@ -17,7 +18,7 @@ class ViewImages extends React.Component{
   console.log(this.props.match.params.keyword);
   	return(
   		<div>
-        	<img src="../server/images/hermione/hermione1.jpeg"/>
+        	<img src='/hermione1'/>
   		</div>
   	);
   }
