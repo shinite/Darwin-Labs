@@ -4,8 +4,11 @@ const mongoose = require('mongoose');
 const path = require('path');
 const search = require('./routes/search')
 var cors = require('cors');
+const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
+
 app.use(cors());
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
@@ -26,4 +29,4 @@ app.use(function(req, res, next) {
 });
 
 
-app.listen(3000, ()=> console.log('listening at 3000'))
+app.listen(port, ()=> console.log('server is up!'))

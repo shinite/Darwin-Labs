@@ -8,7 +8,7 @@ var mongoose=require("mongoose");
 module.exports = function(app,db) {
   const saveinDb = function(req,res,next){
 
-    console.log("in savein DB");
+    console.log("in savein DB");	
     var searchInput = new searchWordSchema({
       word: req.body.input,
     })
@@ -30,7 +30,7 @@ module.exports = function(app,db) {
     const input = req.body.input;
     google.list({
         keyword: input,
-        num: 2,
+        num: 15,
         detail: true,
     })
     .then(function (res) {
@@ -43,7 +43,7 @@ module.exports = function(app,db) {
           Jimp.read(url, function (err, image) {
           image.resize(250, 250)
              .greyscale()                 // set greyscale
-             .write("images/"+foldername+"/"+foldername+index+'.jpeg'); // save
+             .write("../public/images/"+foldername+"/"+foldername+index+'.jpeg'); // save
               });
         })
           }).catch(function(err) {

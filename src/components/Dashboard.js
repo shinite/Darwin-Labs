@@ -8,7 +8,7 @@ class Dashboard extends React.Component{
   }
 
   onInputChange = (e) => {
-    const searchInput = e.target.value;
+    const searchInput = e.target.value.toLowerCase();
     this.setState(()=>({searchInput}))
 
   }
