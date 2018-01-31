@@ -5,19 +5,14 @@ const searchWordSchema = require('../model/searchWordSchema')
 var mongoose=require("mongoose");
 
 
-module.exports = function(app) {
+module.exports = function(app,db) {
   const saveinDb = function(req,res,next){
 
     console.log("in savein DB");
     var searchInput = new searchWordSchema({
       word: req.body.input
     })
-    console.log(searchInput);
-    searchInput.save(function(err){
-      if(err)
-      console.log(err);
-      console.log('input word saved!');
-    })
+    db.collection("searchWord").insert(searchInput)
     next();
   }
 
@@ -48,5 +43,17 @@ module.exports = function(app) {
               console.log('err', err);
           });
         })
+
+        app.get('/getData',(req,res)=>{
+        db.collection('searchWord').find({}).toArray(function(err, result) {
+          if (err) throw err;
+          res.json(result)
+      })
+      })
+
+      app.post('/getImages',(req,res)=>{
+        console.log("i am in get images", req.body.input );
+        
+    })
 
 }

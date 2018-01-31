@@ -5,4 +5,4 @@ var searchWordSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('searchWordDB',searchWordSchema);
+module.exports = mongoose.model('searchWord',searchWordSchema);

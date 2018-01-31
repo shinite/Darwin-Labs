@@ -17,7 +17,7 @@ const db = mongoose.createConnection('mongodb://127.0.0.1/wordsDB',(err,database
   }
 })
 
-search(app)
+search(app,db)
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
