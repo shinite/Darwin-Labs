@@ -10,7 +10,7 @@ module.exports = function(app,db) {
 
     console.log("in savein DB");
     var searchInput = new searchWordSchema({
-      word: req.body.input
+      word: req.body.input,
     })
     db.collection("searchWord").insert(searchInput)
     next();
@@ -42,7 +42,7 @@ module.exports = function(app,db) {
           }).catch(function(err) {
               console.log('err', err);
           });
-        })
+    })
 
         app.get('/getData',(req,res)=>{
         db.collection('searchWord').find({}).toArray(function(err, result) {
@@ -51,9 +51,5 @@ module.exports = function(app,db) {
       })
       })
 
-      app.post('/getImages',(req,res)=>{
-        console.log("i am in get images", req.body.input );
-        
-    })
 
 }
