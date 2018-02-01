@@ -34,7 +34,6 @@ module.exports = function(app,db) {
               console.log('err', err);
           }).then(
         		function(){
-
             console.log("in savein DB");
             var searchInput = new searchWordSchema({
               word: req.body.input,
@@ -46,9 +45,12 @@ module.exports = function(app,db) {
                     db.collection("searchWord").insert(searchInput, {upsert:true})
                 }
             })
-        	res.send('sent successfully')
+
             // db.collection().insert(searchInput)
+          }).then(function(){
+            res.send('sent successfully')
           })
+
     })
 
         app.get('/getData',(req,res)=>{
