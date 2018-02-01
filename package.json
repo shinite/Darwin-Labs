@@ -9,8 +9,7 @@
     "server": "live-server public/",
     "webpack": "webpack",
     "dev-server": "webpack-dev-server",
-    "start": "node server/app.js",
-   "heroku-postbuild" : "yarn run dev-server" 
+    "start": "node server/app.js" 
   },
   "dependencies": {
     "axios": "^0.17.1",
