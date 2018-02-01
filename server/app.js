@@ -5,7 +5,7 @@ const path = require('path');
 const search = require('./routes/search')
 const index = require('./routes/index')
 var cors = require('cors');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 2000;
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const publicPath = path.join(__dirname,'..', 'public')
 app.use(express.static(publicPath))
 
-const db = mongoose.createConnection('mongodb://127.0.0.1/wordsDB',(err,database)=>{
+const db = mongoose.createConnection('mongodb://shinite:anisham%40123@ds121248.mlab.com:21248/wordsdb',(err,database)=>{
   if(err){
     console.log("Not Able to connect to Database");
   }else {
@@ -34,7 +34,6 @@ const db = mongoose.createConnection('mongodb://127.0.0.1/wordsDB',(err,database
 
 
 // index(app);
-
 
 search(app,db)
 

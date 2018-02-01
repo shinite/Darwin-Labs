@@ -4,7 +4,7 @@ const Scraper = require ('images-scraper')
   , google = new Scraper.Google();
 const searchWordSchema = require('../model/searchWordSchema')
 var mongoose=require("mongoose");
-
+const path = require('path');
 
 module.exports = function(app,db) {
 
@@ -22,13 +22,17 @@ module.exports = function(app,db) {
           const url = data.url;
           const extension = url.split('.')[url.split('.').length-1]
           const foldername=input
+          console.log(url,"urrrllll");
 
-
+          console.log("in urll function");
           Jimp.read(url, function (err, image) {
+            console.log(__dirname,"dirrectory name");
           image.resize(250, 250)
              .greyscale()                 // set greyscale
-             .write("../public/images/"+foldername+"/"+foldername+index+'.jpeg'); // save
+             .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+".jpg")); // save
+             console.log("in writeee methodd");
               });
+
         })
           }).catch(function(err) {
 

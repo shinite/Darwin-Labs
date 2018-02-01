@@ -9,7 +9,7 @@ class ViewImages extends React.Component{
 	imagesPath = [];
     for(var i = 0; i<15;i++)
 	{
-    imagesPath.push(`/images/${this.props.match.params.keyword}/${this.props.match.params.keyword}${i}.jpeg`)
+    imagesPath.push(`/images/${this.props.match.params.keyword}/${this.props.match.params.keyword}${i}.jpg`)
     	}
   }
 
