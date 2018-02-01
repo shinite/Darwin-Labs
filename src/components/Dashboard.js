@@ -11,13 +11,11 @@ class Dashboard extends React.Component{
   onInputChange = (e) => {
     const searchInput = e.target.value.toLowerCase();
     this.setState(()=>({searchInput}))
-
   }
 
   handleOnClick = (e) =>{
   	e.preventDefault();
-    	console.log(this.state.searchInput);
-	this.setState(()=>({wait:"please wait while images are getting saved"}))
+	   this.setState(()=>({wait:"please wait while images are getting saved"}))
   		axios({
   		  method: 'post',
   		  url: 'http://localhost:3000/search',
@@ -25,9 +23,7 @@ class Dashboard extends React.Component{
   		    input : this.state.searchInput
   		  }
   		}).then((response)=>{
-  		    	console.log(response.data, 'saved responseee')
-			this.setState(()=>({wait:"You can now view the Images"}))
-
+			     this.setState(()=>({wait:response.data}))
   		    })
   		    .catch(function(err){
   		      console.log(err, 'error!! try again');
@@ -35,7 +31,6 @@ class Dashboard extends React.Component{
   }
 
   render(){
-
   	return(
   		<div className="content-container ">
         <div className="input-group">

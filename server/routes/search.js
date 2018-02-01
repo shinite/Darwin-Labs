@@ -1,3 +1,4 @@
+
 const Jimp = require("jimp");
 const Scraper = require ('images-scraper')
   , google = new Scraper.Google();
@@ -6,7 +7,6 @@ var mongoose=require("mongoose");
 
 
 module.exports = function(app,db) {
-
 
   app.post('/search', function (req, res) {
     var result = false;
@@ -18,23 +18,22 @@ module.exports = function(app,db) {
         detail: true,
     })
     .then(function (res) {
-        console.log('first 10 results from google', res);
         res.map((data,index)=>{
           const url = data.url;
-          const extention = data.url
+          const extension = url.split('.')[url.split('.').length-1]
           const foldername=input
-          console.log(url,"urlllllll");
+
           Jimp.read(url, function (err, image) {
           image.resize(250, 250)
              .greyscale()                 // set greyscale
-             .write("../public/images/"+foldername+"/"+foldername+index+'.jpeg'); // save
+             .write("../public/images/"+foldername+"/"+foldername+index+'.'+extension); // save
               });
         })
           }).catch(function(err) {
-              console.log('err', err);
+
+              res.send('There was some error')
           }).then(
         		function(){
-            console.log("in savein DB");
             var searchInput = new searchWordSchema({
               word: req.body.input,
             })
@@ -45,16 +44,12 @@ module.exports = function(app,db) {
                     db.collection("searchWord").insert(searchInput, {upsert:true})
                 }
             })
-
-            // db.collection().insert(searchInput)
           }).then(function(){
-            res.send('sent successfully')
+            res.send('You can now view the Images')
           })
-
     })
 
-        app.get('/getData',(req,res)=>{
-	      console.log("in getdata");
+    app.get('/getData',(req,res)=>{
         db.collection('searchWord').find({}).toArray(function(err, result) {
           if (err) throw err;
           res.json(result)
