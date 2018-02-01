@@ -20,6 +20,15 @@ const db = mongoose.createConnection('mongodb://127.0.0.1/wordsDB',(err,database
   }
 })
 
+
+app.use(function (req, res, next){
+  if (req.headers['x-forwarded-proto'] === 'https') {
+    res.redirect('http://' + req.hostname + req.url);
+  } else {
+    next();
+  }
+});
+
 search(app,db)
 
 app.use(function(req, res, next) {
