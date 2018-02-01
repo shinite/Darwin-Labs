@@ -5,6 +5,7 @@ class Dashboard extends React.Component{
 
   state = {
     searchInput: null,
+    wait:null
   }
 
   onInputChange = (e) => {
@@ -15,7 +16,8 @@ class Dashboard extends React.Component{
 
   handleOnClick = (e) =>{
   	e.preventDefault();
-    console.log(this.state.searchInput);
+    	console.log(this.state.searchInput);
+	this.setState(()=>({wait:"please wait while images are getting saved"}))
   		axios({
   		  method: 'post',
   		  url: 'http://localhost:3000/search',
@@ -24,6 +26,7 @@ class Dashboard extends React.Component{
   		  }
   		}).then((response)=>{
   		    	console.log(response.data, 'saved responseee')
+			this.setState(()=>({wait:"You can now view the Images"}))
 
   		    })
   		    .catch(function(err){
@@ -42,6 +45,7 @@ class Dashboard extends React.Component{
           <div className="input-group__item">
             <button className="button " onClick={this.handleOnClick}>Search</button></div>
           </div>
+		        <p className="button display--link">{this.state.wait}</p>
   		</div>
   	);
   }

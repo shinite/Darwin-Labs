@@ -6,25 +6,9 @@ var mongoose=require("mongoose");
 
 
 module.exports = function(app,db) {
-  const saveinDb = function(req,res,next){
-
-    console.log("in savein DB");	
-    var searchInput = new searchWordSchema({
-      word: req.body.input,
-    })
-
-    db.collection("searchWord").find({word: req.body.input}).toArray(function(err, result) {
-        if (err) throw err;
-        if(result.length == 0){
-            db.collection("searchWord").insert(searchInput, {upsert:true})
-        }
-    })
-    // db.collection().insert(searchInput)
-    next();
-  }
 
 
-  app.post('/search',saveinDb, function (req, res) {
+  app.post('/search', function (req, res) {
     var result = false;
     console.log("in post search");
     const input = req.body.input;
@@ -48,10 +32,27 @@ module.exports = function(app,db) {
         })
           }).catch(function(err) {
               console.log('err', err);
-          });
+          }).then(
+        		function(){
+
+            console.log("in savein DB");
+            var searchInput = new searchWordSchema({
+              word: req.body.input,
+            })
+
+            db.collection("searchWord").find({word: req.body.input}).toArray(function(err, result) {
+                if (err) throw err;
+                if(result.length == 0){
+                    db.collection("searchWord").insert(searchInput, {upsert:true})
+                }
+            })
+        	res.send('sent successfully')
+            // db.collection().insert(searchInput)
+          })
     })
 
         app.get('/getData',(req,res)=>{
+	      console.log("in getdata");
         db.collection('searchWord').find({}).toArray(function(err, result) {
           if (err) throw err;
           res.json(result)
