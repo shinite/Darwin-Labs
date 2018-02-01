@@ -10,7 +10,6 @@ module.exports = function(app,db) {
 
   app.post('/search', function (req, res) {
     var result = false;
-    console.log("in post search");
     const input = req.body.input;
     google.list({
         keyword: input,
@@ -22,11 +21,7 @@ module.exports = function(app,db) {
           const url = data.url;
           const extension = url.split('.')[url.split('.').length-1]
           const foldername=input
-          console.log(url,"urrrllll");
-
-          console.log("in urll function");
           Jimp.read(url, function (err, image) {
-            console.log(__dirname,"dirrectory name");
           image.resize(250, 250)
              .greyscale()                 // set greyscale
              .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+".jpg")); // save
@@ -55,7 +50,6 @@ module.exports = function(app,db) {
     })
 
     app.get('/getData',(req,res)=>{
-      console.log("in getData");
         db.collection('searchWord').find({}).toArray(function(err, result) {
           if (err) throw err;
           res.json(result)
