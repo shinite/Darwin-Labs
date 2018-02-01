@@ -14,7 +14,7 @@ module.exports = function(app,db) {
     const input = req.body.input;
     google.list({
         keyword: input,
-        num: 2,
+        num: 15,
         detail: true,
     })
     .then(function (res) {
