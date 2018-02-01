@@ -18,7 +18,7 @@ class Dashboard extends React.Component{
 	   this.setState(()=>({wait:"please wait while images are getting saved"}))
   		axios({
   		  method: 'post',
-  		  url: 'http://localhost:3000/search',
+  		  url: '/search',
   		  data: {
   		    input : this.state.searchInput
   		  }

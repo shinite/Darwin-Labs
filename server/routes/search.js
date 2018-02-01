@@ -51,6 +51,7 @@ module.exports = function(app,db) {
     })
 
     app.get('/getData',(req,res)=>{
+      console.log("in getData");
         db.collection('searchWord').find({}).toArray(function(err, result) {
           if (err) throw err;
           res.json(result)

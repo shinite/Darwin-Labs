@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-app.use(cors());
+// app.use(cors());
 const publicPath = path.join(__dirname,'..', 'public')
 app.use(express.static(publicPath))
 
@@ -30,19 +30,21 @@ const db = mongoose.createConnection('mongodb://127.0.0.1/wordsDB',(err,database
 //     next();
 //   }
 // });
-app.get('*',(req,res)=>{
- res.sendFile(path.join(publicPath,'index.html'))
-})
 
-search(app,db)
+
+
 // index(app);
 
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+search(app,db)
 
+//
+// app.get('/getData',(req,res)=>{
+//   console.log("in getDtae");
+// })
+
+app.get('*',(req,res)=>{
+ res.sendFile(path.join(publicPath,'index.html'))
+})
 
 app.listen(port, ()=> console.log('server is up!'))
