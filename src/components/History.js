@@ -9,17 +9,13 @@ class History extends React.Component{
   }
 
   componentWillMount(){
-    console.log("mounted");
-
     axios.get('/getData')
       .then((response)=> {
-        console.log(response);
         this.setState(()=>({wordList:response.data}))
       })
       .catch(function (error) {
         console.log(error);
       });
-      console.log("mount done")
   }
 
   render(){

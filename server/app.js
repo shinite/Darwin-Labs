@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-// app.use(cors());
+
 const publicPath = path.join(__dirname,'..', 'public')
 app.use(express.static(publicPath))
 
@@ -20,26 +20,9 @@ const db = mongoose.createConnection('mongodb://shinite:anisham%40123@ds121248.m
     console.log("connection to database was sucessful");
   }
 })
-//
-//
-// app.use(function (req, res, next){
-//   if (req.headers['x-forwarded-proto'] === 'https') {
-//     res.redirect('http://' + req.hostname + req.url);
-//   } else {
-//     next();
-//   }
-// });
-
-
-
-// index(app);
 
 search(app,db)
 
-//
-// app.get('/getData',(req,res)=>{
-//   console.log("in getDtae");
-// })
 
 app.get('*',(req,res)=>{
  res.sendFile(path.join(publicPath,'index.html'))

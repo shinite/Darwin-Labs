@@ -1,20 +1,35 @@
 import React from 'react';
 import axios from 'axios';
-var imagesPath = []
+
 //import image1 from "../../server/images/hermione/hermione1.jpeg"
 class ViewImages extends React.Component{
 
+  state={
+    imagesPath:[]
+  }
+
 
   componentWillMount(){
-	imagesPath = [];
-    for(var i = 0; i<15;i++)
-	{
-    imagesPath.push(`/images/${this.props.match.params.keyword}/${this.props.match.params.keyword}${i}.jpg`)
-    	}
+
+    axios({
+      method: 'post',
+      url: '/getImages',
+      data: {
+        input : this.props.match.params.keyword
+      }
+    }).then((response)=>{
+         const imagesPath= response.data.map((data,index)=>{
+           return `/images/${this.props.match.params.keyword}/${data}`
+         })
+         this.setState(()=>({imagesPath}))
+        })
+        .catch(function(err){
+          console.log(err, 'error!! try again');
+        });
   }
 
   render(){
-	var displayImage = imagesPath.map((data, index)=><img className="images-edit" key={index}src={data}/>)
+	var displayImage = this.state.imagesPath.map((data, index)=><img className="images-edit" key={index} src={data}/>)
   	return(
   		<div className = "images-display">
         	{displayImage}

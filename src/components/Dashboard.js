@@ -5,7 +5,8 @@ class Dashboard extends React.Component{
 
   state = {
     searchInput: null,
-    wait:null
+    wait:null,
+    err:null
   }
 
   onInputChange = (e) => {

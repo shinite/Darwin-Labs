@@ -5,6 +5,7 @@ const Scraper = require ('images-scraper')
 const searchWordSchema = require('../model/searchWordSchema')
 var mongoose=require("mongoose");
 const path = require('path');
+const fs = require('fs');
 
 module.exports = function(app,db) {
 
@@ -24,7 +25,7 @@ module.exports = function(app,db) {
           Jimp.read(url, function (err, image) {
           image.resize(250, 250)
              .greyscale()                 // set greyscale
-             .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+".jpg")); // 
+             .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+"."+extension)); //
               });
 
         })
@@ -45,6 +46,8 @@ module.exports = function(app,db) {
             })
           }).then(function(){
             res.send('You can now view the Images')
+          }).catch(function(err){
+            res.send('There was some error')
           })
     })
 
@@ -53,7 +56,22 @@ module.exports = function(app,db) {
           if (err) throw err;
           res.json(result)
       })
+   })
+
+    app.post('/getImages',(req,res)=>{
+      const testFolder = path.join(__dirname,"../../public/images",req.body.input);
+      const arr=[];
+
+      fs.readdir(testFolder, (err, files) => {
+        if(files!=undefined){
+          files.forEach(file => {
+            arr.push(file)
+          });
+        }
+          res.send(arr);
       })
+
+    })
 
 
 }
