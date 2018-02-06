@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 const search = require('./routes/search')
 const index = require('./routes/index')
-var cors = require('cors');
 const port = process.env.PORT || 2000;
 const bodyParser = require('body-parser');
 
