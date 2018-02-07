@@ -25,7 +25,7 @@ module.exports = function(app,db) {
           Jimp.read(url, function (err, image) {
           image.resize(250, 250)
              .greyscale()                 // set greyscale
-             .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+"."+extension)); //
+             .write(path.join(__dirname,"../../public/images/"+foldername+"/"+foldername+index+"."+extension)); 
               });
 
         })
